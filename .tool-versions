@@ -1,0 +1,5 @@
+nodejs 16.15.0
+postgres 14.2
+redis 6.2.1
+yarn 1.22.18
+consul 1.12.0
