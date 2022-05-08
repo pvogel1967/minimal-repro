@@ -53,22 +53,6 @@ class LoggingConfigHandler implements LoggingConfig {
         this.#logger = rootLogger.child('LoggingConfigHandler');
     }
 
-    #validateNewValue(value: Partial<LoggingConfig>): boolean {
-        if (!this.#isInitialized) {
-            return true;
-        }
-        const toValidate = { ...this.#config, ...value };
-        const validationResult = LoggingConfigSchema.validate(toValidate);
-        if (validationResult.error) {
-            this.#logger.error(
-                { data: value, error: validationResult.error, path: 'logging/config' },
-                `Bad config in consul`,
-            );
-            return false;
-        }
-        return true;
-    }
-
     async init(): Promise<void> {
         if (!this.#isInitialized) {
             // in real code I'm doing some async stuff here to talk to consul
